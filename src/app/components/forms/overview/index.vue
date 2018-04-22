@@ -52,6 +52,7 @@
             .form
               b-form-group
                 input(placeholder='車両形式（例：3000系, 100形')
+    router-link(to='status') 出品物の状態
 </template>
 
 <script lang='ts'>
@@ -87,24 +88,24 @@ export default {
        {text: 'その他', value: 'other'}
      ],
      eastJapan: [
-       {text: '小田急(小田急電鉄株式会社)', value: ''},
-       {text: '京王(京王電鉄株式会社)', value: ''},
-       {text: '形成(形成電鉄株式会社)', value: ''},
-       {text: '京急(京浜急行電鉄株式会社)', value: ''},
-       {text: '西武(西武鉄道株式会社)', value: ''},
-       {text: '東急(東京急行電鉄株式会社)', value: ''},
-       {text: '東京メトロ(東京地下鉄株式会社)', value: ''},
-       {text: '東武(東武鉄道株式会社)', value: ''},
-       {text: '都営(東京都交通局)', value: ''}
+       {text: '小田急(小田急電鉄株式会社)', value: 'odakyu'},
+       {text: '京王(京王電鉄株式会社)', value: 'keio'},
+       {text: '形成(形成電鉄株式会社)', value: 'keisei'},
+       {text: '京急(京浜急行電鉄株式会社)', value: 'keikyu'},
+       {text: '西武(西武鉄道株式会社)', value: 'seibu'},
+       {text: '東急(東京急行電鉄株式会社)', value: 'tokyu'},
+       {text: '東京メトロ(東京地下鉄株式会社)', value: 'metro'},
+       {text: '東武(東武鉄道株式会社)', value: 'tobu'},
+       {text: '都営(東京都交通局)', value: 'toei'}
      ],
      westJapan: [
-       {text: '近鉄(近畿日本鉄道株式会社)', value: ''},
-       {text: '京阪(京阪電気鉄道株式会社)', value: ''},
-       {text: '南海(南海電気鉄道株式会社)', value: ''},
-       {text: '西鉄(西日本鉄道株式会社)', value: ''},
-       {text: '阪神(阪神電気鉄道株式会社)', value: ''},
-       {text: '阪急(阪急電鉄株式会社)', value: ''},
-       {text: '名鉄(名古屋鉄道株式会社)', value: ''}
+       {text: '近鉄(近畿日本鉄道株式会社)', value: 'kintetsu'},
+       {text: '京阪(京阪電気鉄道株式会社)', value: 'keihan'},
+       {text: '南海(南海電気鉄道株式会社)', value: 'nankai'},
+       {text: '西鉄(西日本鉄道株式会社)', value: 'nisitetsu'},
+       {text: '阪神(阪神電気鉄道株式会社)', value: 'hanshin'},
+       {text: '阪急(阪急電鉄株式会社)', value: 'hankyu'},
+       {text: '名鉄(名古屋鉄道株式会社)', value: 'meitetsu'}
      ]
    }
  }

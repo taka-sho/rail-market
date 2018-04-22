@@ -29,10 +29,11 @@
           b-form-radio-group(:id="'options' + index" :options='options' :name="'options' + index" v-model='f4')
       .form
         b-form-group(label='画像')
-          label.uploadTitle
+          label.uploadTitle(@drop.prevent="onDrop")
             p(v-show='!uploadedImage') 画像をドロップするか、クリックしてファイルを選択
             img(v-show='uploadedImage' :src='uploadedImage')
             input.imageUpload(v-show='!uploadedImage' type='file' v-on:change='onFileChange')
+    router-link(to='delivery') 配送方法へ
 </template>
 
 <script lang='ts'>
