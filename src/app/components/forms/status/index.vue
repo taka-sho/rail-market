@@ -6,9 +6,8 @@
         .title
           h3 両数
         .form
-          b-form-group
-            input(type='number' min='1' max='20' v-model='cars' placeholder='1~20' required)
-    .terms(v-for='(i, index) in Number(cars)').cars
+          b-form-select(v-model="selected" :options="options" class="mb-3")
+    .terms(v-for='(i, index) in Number(selected)').cars
       .inner
         .title
           h2 {{ i }}両目
@@ -40,7 +39,9 @@ export default {
   },
   data () {
     return {
-      cars: '1'
+      cars: 1,
+      selected: '1',
+      options: Array.apply(null, new Array(20)).map((v,i) => 1 + i) // make array 1 to 20
     }
   }
 }
@@ -75,4 +76,11 @@ label.uploadTitle {
     width: auto;
   }
 }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 </style>
