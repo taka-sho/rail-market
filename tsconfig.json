@@ -4,7 +4,7 @@
    "target": "es5",
    "module": "es2015",
    "moduleResolution": "node",
-   "lib": ["dom", "es5", "es2015.promise"]
+   "lib": ["DOM", "es5", "es2015.promise"]
   },
   "exclude": [
     "node_modules"
