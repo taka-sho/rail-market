@@ -7,6 +7,6 @@ jobs:
     steps:
       - checkout
       - run: yarn
-      - npm run build
+      - run: npm run build
       - store_artifacts:
           path: dist
