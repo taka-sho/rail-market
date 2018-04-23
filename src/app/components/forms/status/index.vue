@@ -8,9 +8,8 @@
         .form
           b-form-select(v-model="selected" :options="options" class="mb-3")
     .terms(v-for='(i, index) in Number(selected)').cars
-      .inner
-        .title
-          h2 {{ i }}両目
+      .title
+        h2 {{ i }}両目
       HeadAndTail(:index='index')
       Running(:index='index')
       Coupler(:index='index')
