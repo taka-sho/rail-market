@@ -6,16 +6,17 @@
       b-row.inner
         .form
           b-form-group
-        b-form-radio-group(id='btnradios4' stacked :options='area' v-model="selected" name='area')
-          b-col.form(v-show="selected === 'east'")
-            b-form-group
-              b-form-radio-group(id='btnradios4_1' stacked :options='eastJapan' name='company')
-          b-col.form(v-if="selected === 'west'")
-            b-form-group
-              b-form-radio-group(id='btnradios4_2' stacked :options='westJapan' name='company')
-          b-col.form(v-if="selected === 'other'")
-            b-form-group
-              input(placeholder='鉄道事業者名')
+        b-col
+          b-form-radio-group(id='btnradios4' stacked :options='area' v-model="selected" name='area')
+        b-col.form(v-if="selected === 'east'")
+          b-form-group
+            b-form-radio-group(id='btnradios4_1' stacked :options='eastJapan' name='company')
+        b-col.form(v-if="selected === 'west'")
+          b-form-group
+            b-form-radio-group(id='btnradios4_2' stacked :options='westJapan' name='company')
+        b-col.form(v-if="selected === 'other'")
+          b-form-group
+            input(placeholder='鉄道事業者名')
     .terms
       .inner
         .title
@@ -61,7 +62,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .terms {
   margin-bottom: 15px;
 
