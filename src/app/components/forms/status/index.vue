@@ -12,87 +12,35 @@
       .inner
         .title
           h2 {{ i }}両目
-      .form
-        b-form-group(label='ヘッドライト・テールライト')
-          b-form-radio-group(:id="'head' + index" :options='headAndTail' :name="'head' + index" v-model='f0')
-      .form
-        b-form-group(label='走行状態')
-          b-form-radio-group(:id="'running' + index" :options='running' :name="'running' + index" v-model='f1')
-      .form
-        b-form-group(label='カプラー')
-          b-form-radio-group(:id="'coupler' + index" :options='coupler' :name="'coupler' + index" v-model='f2')
-      .form
-        b-form-group(label='パンタグラフ')
-          b-form-radio-group(:id="'pantograph' + index" :options='pantograph' :name="'pantograph' + index" v-model='f3')
-      .form
-        b-form-group(label='付属品')
-          b-form-radio-group(:id="'options' + index" :options='options' :name="'options' + index" v-model='f4')
-      .form
-        b-form-group(label='画像')
-          label.uploadTitle(@drop.prevent="onDrop")
-            p(v-show='!uploadedImage') 画像をドロップするか、クリックしてファイルを選択
-            img(v-show='uploadedImage' :src='uploadedImage')
-            input.imageUpload(v-show='!uploadedImage' type='file' v-on:change='onFileChange')
+      HeadAndTail(:index='index')
+      Running(:index='index')
+      Coupler(:index='index')
+      Pantograph(:index='index')
+      Options(:index='index')
+      UploadImage(:index='index')
     router-link(to='delivery') 配送方法へ
 </template>
 
 <script lang='ts'>
+import HeadAndTail from './assets/headAndTail'
+import Running from './assets/running'
+import Coupler from './assets/coupler'
+import Pantograph from './assets/pantograph'
+import Options from './assets/options'
+import UploadImage from './assets/uploadImage'
+
 export default {
+  components: {
+    HeadAndTail,
+    Running,
+    Coupler,
+    Pantograph,
+    Options,
+    UploadImage
+  },
   data () {
     return {
-      f0: '0',
-      f1: '0',
-      f2: '0',
-      f3: '0',
-      f4: '0',
-      f5: '0',
-      f6: '0',
-      cars: '1',
-      headAndTail: [
-        {text: 'なし', value: '0'},
-        {text: '点灯しない', value: '1'},
-        {text: '一部難あり', value: '2'},
-        {text: '正常に点灯する', value: '3'}
-      ],
-      running: [
-        {text: 'モーターなし', value: '0'},
-        {text: '走り始めからスムーズ', value: '1'},
-        {text: '一定速度以上はスムーズ', value: '2'},
-        {text: 'スムーズに走らない', value: '3'},
-        {text: '全く走らない', value: '4'},
-        {text: '異音がする', value: '5'}
-      ],
-      coupler: [
-        {text: 'なし', value: '0'},
-        {text: 'アーノルト', value: '1'},
-        {text: 'KATOカプラーフック付', value: '2'},
-        {text: 'KATOカプラーフック無', value: '3'},
-        {text: 'TNカプラー'}
-      ],
-      pantograph: [
-        {text: 'なし', value: '0'},
-        {text: '正常', value: '1'},
-        {text: '破損', value: '2'},
-      ],
-      options: [
-        {text: '完品', value: '0'},
-        {text: '取り付け済み', value: '1'},
-        {text: '欠品', value: '2'}
-      ],
-      uploadedImage: ''
-    }
-  },
-  methods:{
-    onFileChange: function (e) {
-      let files = e.target.files || e.dataTransfer.files
-      this.createImage(files[0])
-    },
-    createImage(file) {
-      let reader = new FileReader()
-      reader.onload = (e) => {
-        this.uploadedImage = e.target.result
-      };
-      reader.readAsDataURL(file)
+      cars: '1'
     }
   }
 }
