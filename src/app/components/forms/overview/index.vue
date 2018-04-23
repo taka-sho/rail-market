@@ -29,16 +29,5 @@ export default {
 }
 </script>
 
-<style lang='scss'>
-.terms {
-  margin-bottom: 15px;
-
-  .inner {
-    border-bottom: solid 1px #ccc;
-
-    span.exact {
-      color: #999;
-    }
-  }
-}
+<style lang='scss' scoped>
 </style>

@@ -57,26 +57,6 @@ export default {
   }
 }
 
-label.uploadTitle {
-  color: #333;
-	background-color: #eee;
-	padding: 30px;
-	border: dotted 4px #AAAAAA;
-  cursor: pointer;
-
-  input.imageUpload {
-    display: none;
-    height: 100px;
-    width: 400px;
-    border: dotted 3px #ddd;
-  }
-
-  img {
-    height: 300px;
-    width: auto;
-  }
-}
-
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;

@@ -1,26 +1,19 @@
 <template lang="pug">
   div
-    b-row
-      b-col.terms
-        .inner
-          .title
-            h3 鉄道事業者
-          .form
-            b-form-group
-              b-form-radio-group(id='btnradios4' stacked :options='area' v-model="selected" name='area')
-      b-col.terms(v-show="selected === 'east'")
-        .inner
-          .form
+    .terms
+      .title
+        h3 鉄道事業者
+      b-row.inner
+        .form
+          b-form-group
+        b-form-radio-group(id='btnradios4' stacked :options='area' v-model="selected" name='area')
+          b-col.form(v-show="selected === 'east'")
             b-form-group
               b-form-radio-group(id='btnradios4_1' stacked :options='eastJapan' name='company')
-      b-col.terms(v-if="selected === 'west'")
-        .inner
-          .form
+          b-col.form(v-if="selected === 'west'")
             b-form-group
               b-form-radio-group(id='btnradios4_2' stacked :options='westJapan' name='company')
-      b-col.terms(v-if="selected === 'other'")
-        .inner
-          .form
+          b-col.form(v-if="selected === 'other'")
             b-form-group
               input(placeholder='鉄道事業者名')
     .terms
@@ -68,5 +61,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.terms {
+  margin-bottom: 15px;
+
+  .inner {
+    border-bottom: solid 1px #ccc;
+
+    span.exact {
+      color: #999;
+    }
+  }
+}
 </style>

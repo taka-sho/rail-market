@@ -8,7 +8,7 @@
           b-form-radio-group(id='btnradios3' stacked :options='maker' name='maker' v-model='selected')
       .form.col(v-show="selected === '6'")
         b-form-group
-          input(placeholder='鉄道事業者名')
+          input(placeholder='模型メーカー名')
 </template>
 
 <script lang='ts'>
