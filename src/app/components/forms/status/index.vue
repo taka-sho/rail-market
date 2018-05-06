@@ -10,7 +10,7 @@
     .terms(v-for='(i, index) in Number(selected)').cars
       .title
         h2 {{ i }}両目
-      HeadAndTail(:index='index')
+      Lights(:index='index')
       Running(:index='index')
       Coupler(:index='index')
       Pantograph(:index='index')
@@ -20,7 +20,7 @@
 </template>
 
 <script lang='ts'>
-import HeadAndTail from './assets/headAndTail'
+import Lights from './assets/lights'
 import Running from './assets/running'
 import Coupler from './assets/coupler'
 import Pantograph from './assets/pantograph'
@@ -29,7 +29,7 @@ import UploadImage from './assets/uploadImage'
 
 export default {
   components: {
-    HeadAndTail,
+    Lights,
     Running,
     Coupler,
     Pantograph,

@@ -1,7 +1,12 @@
 <template lang="pug">
   .form
     b-form-group(label='パンタグラフ')
-      b-form-radio-group(:id="'pantograph' + index" :options='pantograph' :name="'pantograph' + index" v-model='answer')
+      b-form-radio-group(
+        :id="'pantograph' + index"
+        :options='pantograph'
+        :name="'pantograph' + index"
+        v-model='answer'
+      )
 </template>
 
 <script lang='ts'>
@@ -9,7 +14,7 @@ export default {
   props: ['index'],
   data () {
     return {
-      answer: '0',
+      answer: this.$store.state.pantograph | 0,
       pantograph: [
         {text: 'なし', value: '0'},
         {text: '正常', value: '1'},

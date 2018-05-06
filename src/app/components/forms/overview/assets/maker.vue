@@ -2,10 +2,16 @@
   .terms
     .inner
       .title
-        h3 模型メーカー
+        h3 模型メーカー {{ selected }}
       .form
         b-form-group
-          b-form-radio-group(id='btnradios3' stacked :options='maker' name='maker' v-model='selected')
+          b-form-radio-group(
+            id='btnradios3'
+            name='maker'
+            v-model='selected'
+            :options='maker'
+            stacked
+          )
       .form.col(v-show="selected === '6'")
         b-form-group
           input(placeholder='模型メーカー名')
@@ -15,7 +21,7 @@
 export default {
   data () {
     return {
-      selected: '0',
+      selected: this.$store.state.maker | 0,
       maker: [
         {text: "カトー<span class='exact'>(KATO)</span>", value: '0'},
         {text: "トミックス<span class='exact'>(TOMIX)</span>", value: '1'},

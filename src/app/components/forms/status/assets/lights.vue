@@ -1,7 +1,12 @@
 <template lang="pug">
   .form
     b-form-group(label='ヘッドライト・テールライト')
-      b-form-radio-group(:id="'head' + index" :options='headAndTail' :name="'head' + index" v-model='answer')
+      b-form-radio-group(
+        :id="'head' + index"
+        :options='headAndTail'
+        :name="'head' + index"
+        v-model='answer'
+      )
 </template>
 
 <script lang='ts'>
@@ -11,7 +16,7 @@ export default {
   ],
   data () {
     return {
-      answer: '0',
+      answer: this.$store.state.lights | 0,
       headAndTail: [
         {text: 'なし', value: '0'},
         {text: '点灯しない', value: '1'},

@@ -10,8 +10,15 @@
           @drop.prevent="uploadImage"
         )
         p(v-show='!(uploading)') 画像をドロップするか、クリックしてファイルを選択
-        img(v-show='uploading' :src='uploadedImage')
-        input.imageUpload(type='file' @change='uploadImage' accept='image/*')
+        img(
+          v-show='uploading'
+          v-on:src='uploadedImage'
+        )
+        input.imageUpload(
+          type='file'
+          v-on:change='uploadImage'
+          accept='image/*'
+        )
 </template>
 
 <script lang='ts'>
@@ -24,12 +31,12 @@ export default {
     }
   },
   methods:{
-    uploadImage : function (e) {
+    uploadImage (e) {
       const files = e.target.files || e.dataTransfer.files
       this.createImage(files[0])
       this.uploading = true
     },
-    createImage : function (file) {
+    createImage (file) {
       const reader = new FileReader()
       reader.onload = e => {
         this.uploadedImage = e.target.result
