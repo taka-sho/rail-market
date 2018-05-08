@@ -1,24 +1,43 @@
-import Overview from '../components/forms/overview'
-import Mypage from '../components/home/mypage'
-import Signup from '../components/home/signup'
-import Signout from '../components/home/signout'
-import Login from '../components/home/login'
-import Status from '../components/forms/status'
-import Delivery from '../components/forms/delivery'
+import Forms from '@compos/forms'
+import Overview from '@compos/forms/overview'
+import Mypage from '@compos/home/mypage'
+import Signup from '@compos/home/signup'
+import Signout from '@compos/home/signout'
+import Signin from '@compos/home/signin'
+import Status from '@compos/forms/status'
+import Delivery from '@compos/forms/delivery'
 
 
 const routes = [
   {
-    path: '/',
-    redirect: '/login'
+    path: '*',
+    redirect: '/signin'
   },
   {
     path: '/mypage',
     component: Mypage
   },
   {
-    path: '/login',
-    component: Login
+    path: '/signin',
+    component: Signin
+  },
+  {
+    path: '/assessment',
+    component: Forms,
+    children: [
+      {
+        path: 'overview',
+        component: Overview
+      },
+      {
+        path: 'status',
+        component: Status
+      },
+      {
+        path: 'delivery',
+        component: Delivery
+      },
+    ]
   },
   {
     path: '/signup',
@@ -27,22 +46,6 @@ const routes = [
   {
     path: '/signout',
     component: Signout
-  },
-  {
-    path: '/overview',
-    component: Overview
-  },
-  {
-    path: '/status',
-    component: Status
-  },
-  {
-    path: '/delivery',
-    component: Delivery
-  },
-  {
-    path: '/**',
-    redirect: '/login'
   }
 ]
 

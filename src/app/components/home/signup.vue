@@ -18,7 +18,7 @@
 </template>
 
 <script lang='ts'>
-import signup from '../../firebase/utils/auth/signup'
+import signup from '@fire/utils/auth/signup'
 export default {
   data () {
     return {

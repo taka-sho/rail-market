@@ -1,5 +1,7 @@
 <template lang="pug">
-  h1 My page
+  div
+    h1 My page
+    router-link(to='assessment/overview') To assessment
 </template>
 
 <script lang='ts'>

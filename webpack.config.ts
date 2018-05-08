@@ -14,7 +14,9 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.vue', '.js'],
     alias: {
-      vue$: 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js',
+      '@compos': path.join(__dirname, 'src/app/components'),
+      '@fire': path.join(__dirname, 'src/app/firebase')
     }
   },
   module: {

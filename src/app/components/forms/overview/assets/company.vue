@@ -2,7 +2,7 @@
   div
     .terms
       .title
-        h3 鉄道事業者 {{ selected }}
+        h3 鉄道事業者
       b-row.inner
         .form
           b-form-group
@@ -21,6 +21,7 @@
               stacked
               :options='eastJapan'
               v-model="selected"
+              v-on:change='updateCompany'
               name='company'
             )
         b-col.form(v-if="companyArea === 'west'")
@@ -30,31 +31,46 @@
               stacked
               :options='westJapan'
               v-model="selected"
+              v-on:change='updateCompany'
               name='company'
             )
         b-col.form(v-if="companyArea === 'other'")
           b-form-group
             input(
               placeholder='鉄道事業者名'
-              v-model='selected'
+              v-model='otherCompany'
+              v-on:change='updateCompanyInput'
             )
     .terms
       .inner
         .title
-          h3 車両形式 {{ train }}
+          h3 車両形式
         .form
           b-form-group
             input(
               placeholder='車両形式（例：3000系, 100形'
+              v-on:change='updateSeries'
               v-model='train'
             )
 </template>
 
 <script lang='ts'>
 export default {
+  methods: {
+    updateCompany (e) {
+      this.$parent.company = e
+    },
+    updateCompanyInput (e) {
+      this.$parent.company = this.otherCompany
+    },
+    updateSeries (e) {
+      this.$parent.train = this.train
+    },
+  },
   data () {
     return {
       companyArea: 'jr',
+      otherCompany: '',
       train: '',
       selected: this.$store.state.company | 0,
       area: [

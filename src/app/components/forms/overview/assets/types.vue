@@ -2,20 +2,31 @@
   .terms
     .inner
       .title
-        h3 品目 {{ selected }}
+        h3 品目
       .form
         b-form-group
           b-form-radio-group(
             id='btnradios2'
             name='types'
             :options='types'
+            v-on:change='update'
             v-model='selected'
             stacked
           )
 </template>
 
 <script lang='ts'>
+
+import * as firebase from 'firebase'
+
+import database from '@fire/utils/database'
+
 export default {
+  methods: {
+    update (e) {
+      this.$parent.types = e
+    }
+  },
   data () {
     return {
       selected: this.$store.state.type | 0,

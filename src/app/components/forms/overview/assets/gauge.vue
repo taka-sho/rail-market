@@ -2,7 +2,7 @@
   .terms
     .inner
       .title
-        h3 ゲージ {{ gaugeVal }}
+        h3 ゲージ
       .form
         b-form-group
           b-form-radio-group(
@@ -10,32 +10,22 @@
             name='gauge'
             :options='form'
             v-model='gaugeVal'
-            v-on:click='update'
+            v-on:change='update'
             stacked
           )
 </template>
 
 <script lang='ts'>
 
-import {
-  mapActions,
-  mapState
-} from 'vuex'
+import database from '@fire/utils/database'
 
 export default {
   methods: {
-    ...mapActions([
-      // 'setGauge'
-    ]),
-    update () {
-      console.log('honya')
+    update (e) {
+      this.$parent.gauge = e
     }
   },
-  computed: {
-    // ...mapState([
-    //   'gaugeVal'
-    // ])
-  },
+  props: ['db'],
   data ()  {
     return {
       gaugeVal: this.$store.state.gauge | 0,
