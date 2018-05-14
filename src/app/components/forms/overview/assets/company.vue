@@ -20,7 +20,7 @@
               id='btnradios4_1'
               stacked
               :options='eastJapan'
-              v-model="selected"
+              v-model="companyNum"
               v-on:change='updateCompany'
               name='company'
             )
@@ -30,7 +30,7 @@
               id='btnradios4_2'
               stacked
               :options='westJapan'
-              v-model="selected"
+              v-model="companyNum"
               v-on:change='updateCompany'
               name='company'
             )
@@ -38,7 +38,7 @@
           b-form-group
             input(
               placeholder='鉄道事業者名'
-              v-model='otherCompany'
+              v-on:value='companyName'
               v-on:change='updateCompanyInput'
             )
     .terms
@@ -50,29 +50,39 @@
             input(
               placeholder='車両形式（例：3000系, 100形'
               v-on:change='updateSeries'
-              v-model='train'
+              v-model='trainSeries'
             )
 </template>
 
 <script lang='ts'>
+import { mapState, mapActions } from 'vuex'
+import MutationTypes from '@store/mutationTypes'
+
 export default {
+  computed: mapState([
+    'railwayCompany',
+    'railwayCompanyName',
+    'series'
+  ]),
   methods: {
-    updateCompany (e) {
-      this.$parent.company = e
-    },
+    ...mapActions(['updateOverview']),
     updateCompanyInput (e) {
-      this.$parent.company = this.otherCompany
+      this.updateOverview({
+        key: MutationTypes.UPDATES.RAILWAY_COMPANY_NAME,
+        changed: e.target ? e.target.value : ''
+      })
     },
     updateSeries (e) {
-      this.$parent.train = this.train
-    },
+      this.updateOverview({
+        key: MutationTypes.UPDATES.SERIES,
+        changed: e.target ? e.target.value : ''
+      })
+    }
   },
   data () {
     return {
       companyArea: 'jr',
-      otherCompany: '',
-      train: '',
-      selected: this.$store.state.company | 0,
+      trainSeries: '',
       area: [
         {text: '国鉄・JR', value: 'jr'},
         {text: '大手関東私鉄', value: 'east'},
@@ -100,6 +110,11 @@ export default {
         {text: '名鉄(名古屋鉄道株式会社)', value: '17'}
       ]
     }
+  },
+  mounted () {
+    this.companyNum = this.railwayCompany
+    this.companyName = this.railwayCompanyName
+    this.trainSeries = this.series
   }
 }
 </script>

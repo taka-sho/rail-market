@@ -1,12 +1,17 @@
 <template lang="pug">
   b-container
     h2 出品物の状態
+    router-link(to='/mypage') Go to Mypage
     .terms
       .inner
         .title
           h3 両数
         .form
-          b-form-select(v-model="selected" :options="options" class="mb-3")
+          b-form-select(
+            v-model="selected"
+            :options="options"
+            class="mb-3"
+          )
     .terms(v-for='(i, index) in Number(selected)').cars
       .title
         h2 {{ i }}両目
@@ -27,6 +32,8 @@ import Pantograph from './assets/pantograph'
 import Options from './assets/options'
 import UploadImage from './assets/uploadImage'
 
+import database from '@fire/utils/database'
+
 export default {
   components: {
     Lights,
@@ -38,10 +45,19 @@ export default {
   },
   data () {
     return {
+      d: {},
       cars: 1,
       selected: '1',
       options: Array.apply(null, new Array(20)).map((v,i) => 1 + i) // make array 1 to 20
     }
+  },
+  beforeMount () {
+    database.read(database.uid()).then(snapshot => {
+      this.d = snapshot.val().trains[this.$route.params.id.status]
+      if (!this.d) {}
+    }).catch(e => {
+      console.log(e.message)
+    })
   }
 }
 </script>

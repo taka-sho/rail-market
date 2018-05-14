@@ -4,19 +4,19 @@
       label='画像'
     )
       label.dragArea(
-          @dragleave.prevent=""
-          @dragover.prevent=""
-          @dragenter.prevent=""
-          @drop.prevent="uploadImage"
+          v-on:dragleave.prevent=""
+          v-on:dragover.prevent=""
+          v-on:dragenter.prevent=""
+          v-on:drop.prevent='onFileChange'
         )
-        p(v-show='!(uploading)') 画像をドロップするか、クリックしてファイルを選択
+        p(v-show='!uploaded') 画像をドロップするか、クリックしてファイルを選択
         img(
-          v-show='uploading'
+          v-show='uploaded'
           v-on:src='uploadedImage'
         )
         input.imageUpload(
           type='file'
-          v-on:change='uploadImage'
+          v-on:change='onFileChange'
           accept='image/*'
         )
 </template>
@@ -27,19 +27,20 @@ export default {
   data () {
     return {
       uploadedImage: '',
-      uploading: false
+      uploaded: false
     }
   },
   methods:{
-    uploadImage (e) {
+    onFileChange (e) {
       const files = e.target.files || e.dataTransfer.files
       this.createImage(files[0])
-      this.uploading = true
+      this.uploaded = true
     },
     createImage (file) {
       const reader = new FileReader()
       reader.onload = e => {
         this.uploadedImage = e.target.result
+        console.log(this.uploadedImage)
       }
       reader.readAsDataURL(file)
     }

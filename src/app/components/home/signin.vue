@@ -14,24 +14,25 @@
       type='submit'
       variant='primary'
       v-on:click='signIn'
-    ) Signin
+    ) {{ status }}
 </template>
 
 <script lang='ts'>
-import signin from '../../firebase/utils/auth/signin'
+import signin from '@fire/utils/auth/signin'
 
 export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      status: 'sign in'
     }
   },
   methods: {
     signIn: function () {
+      this.status = 'Loading...'
       signin(this.email, this.password)
         .then(user => {
-          alert('Success!')
           this.$router.push('/mypage')
         }).catch(err => {
           alert(err.message)

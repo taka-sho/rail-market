@@ -8,29 +8,32 @@
           b-form-radio-group(
             id='btnradios2'
             name='types'
-            :options='types'
+            :options='form'
             v-on:change='update'
-            v-model='selected'
+            v-model='val'
             stacked
           )
 </template>
-
 <script lang='ts'>
+import { mapState, mapActions } from 'vuex'
+import MutationTypes from '@store/mutationTypes'
 
-import * as firebase from 'firebase'
-
-import database from '@fire/utils/database'
 
 export default {
   methods: {
+    ...mapActions(['updateOverview']),
     update (e) {
-      this.$parent.types = e
+      this.updateOverview({
+        key: MutationTypes.UPDATES.PRODUCT_TYPE,
+        changed: e
+      })
     }
   },
+  computed: mapState(['productType']),
   data () {
     return {
-      selected: this.$store.state.type | 0,
-      types: [
+      val: '0',
+      form: [
         {text: '車両セット', value: '0'},
         {text: '車両単品', value: '1'},
         {text: 'パーツ類', value: '2'},
@@ -39,6 +42,9 @@ export default {
         {text: 'ストラクチャー', value: '5'}
       ],
     }
+  },
+  mounted () {
+    this.val = this.productType
   }
 }
 </script>

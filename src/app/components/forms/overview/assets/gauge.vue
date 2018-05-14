@@ -6,10 +6,9 @@
       .form
         b-form-group
           b-form-radio-group(
-            id='btnradios1'
             name='gauge'
             :options='form'
-            v-model='gaugeVal'
+            v-model='val'
             v-on:change='update'
             stacked
           )
@@ -17,23 +16,35 @@
 
 <script lang='ts'>
 
-import database from '@fire/utils/database'
+import {
+  mapState,
+  mapActions
+} from 'vuex'
+
+import MutationTypes from '@store/mutationTypes'
 
 export default {
-  methods: {
-    update (e) {
-      this.$parent.gauge = e
-    }
-  },
-  props: ['db'],
-  data ()  {
+  data () {
     return {
-      gaugeVal: this.$store.state.gauge | 0,
+      val: '0',
       form: [
         { text: 'Nゲージ', value: '0' },
         { text: '16番ゲージ', value: '1' }
       ]
     }
+  },
+  methods: {
+    ...mapActions(['updateOverview']),
+    update (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.SERIES,
+        changed: e
+      })
+    }
+  },
+  computed: mapState(['gauge']),
+  mounted () {
+    this.val = this.gauge
   }
 }
 </script>

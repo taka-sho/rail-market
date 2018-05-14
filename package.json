@@ -41,6 +41,7 @@
     "firebase": "^4.13.1",
     "npm": "^6.0.0",
     "vue": "^2.5.16",
+    "vue-class-component": "^6.2.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

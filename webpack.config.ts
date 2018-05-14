@@ -16,7 +16,8 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       '@compos': path.join(__dirname, 'src/app/components'),
-      '@fire': path.join(__dirname, 'src/app/firebase')
+      '@fire': path.join(__dirname, 'src/app/firebase'),
+      '@store' : path.join(__dirname, 'src/app/store')
     }
   },
   module: {
