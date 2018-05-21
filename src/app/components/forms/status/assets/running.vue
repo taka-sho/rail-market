@@ -5,16 +5,20 @@
         :id="'running' + index"
         :options='form'
         :name="'running' + index"
-        v-model='answer'
+        v-model='val'
+        v-on:change='update'
       )
 </template>
 
 <script lang='ts'>
+import { mapState, mapActions } from 'vuex'
+import MutationTypes from '@store/mutationTypes'
+
 export default {
   props: [ 'index' ],
   data () {
     return {
-      answer: this.$store.state.running | 0,
+      val: '0',
       form: [
         {text: 'モーターなし', value: '0'},
         {text: '走り始めからスムーズ', value: '1'},
@@ -24,6 +28,19 @@ export default {
         {text: '異音がする', value: '5'}
       ]
     }
+  },
+  methods: {
+    ...mapActions(['updateStatus']),
+    update (e) {
+      this.updateStatus({
+        key: MutationTypes.UPDATES.DETAILS.RUNNING,
+        changed: e,
+        index: this.index
+      })
+    }
+  },
+  mounted () {
+    this.val = this.$store.state[`t${this.index}`].running
   }
 }
 </script>

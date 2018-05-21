@@ -12,6 +12,7 @@
             stacked
             :options='area'
             v-model="companyArea"
+            v-on:change='updateCompanyArea'
             name='area'
           )
         b-col.form(v-if="companyArea === 'east'")
@@ -21,7 +22,7 @@
               stacked
               :options='eastJapan'
               v-model="companyNum"
-              v-on:change='updateCompany'
+              v-on:change='updageCompanyNum'
               name='company'
             )
         b-col.form(v-if="companyArea === 'west'")
@@ -31,14 +32,14 @@
               stacked
               :options='westJapan'
               v-model="companyNum"
-              v-on:change='updateCompany'
+              v-on:change='updageCompanyNum'
               name='company'
             )
         b-col.form(v-if="companyArea === 'other'")
           b-form-group
             input(
               placeholder='鉄道事業者名'
-              v-on:value='companyName'
+              v-model='companyName'
               v-on:change='updateCompanyInput'
             )
     .terms
@@ -52,6 +53,17 @@
               v-on:change='updateSeries'
               v-model='trainSeries'
             )
+    .terms
+      .inner
+        .title
+          h3 販売価格
+        .form
+          b-form-group
+            input(
+              placeholder='2000円以上'
+              v-on:change='updateProductValue'
+              v-model.number='pValue'
+            )
 </template>
 
 <script lang='ts'>
@@ -60,16 +72,30 @@ import MutationTypes from '@store/mutationTypes'
 
 export default {
   computed: mapState([
-    'railwayCompany',
+    'railwayCompanyArea',
+    'railwayCompanyNum',
     'railwayCompanyName',
-    'series'
+    'series',
+    'productValue'
   ]),
   methods: {
     ...mapActions(['updateOverview']),
+    updageCompanyNum (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.RAILWAY_COMPANY_NUM,
+        changed: e
+      })
+    },
     updateCompanyInput (e) {
       this.updateOverview({
         key: MutationTypes.UPDATES.RAILWAY_COMPANY_NAME,
         changed: e.target ? e.target.value : ''
+      })
+    },
+    updateCompanyArea (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.RAILWAY_COMPANY_AREA,
+        changed: e
       })
     },
     updateSeries (e) {
@@ -77,12 +103,20 @@ export default {
         key: MutationTypes.UPDATES.SERIES,
         changed: e.target ? e.target.value : ''
       })
+    },
+    updateProductValue (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.PRODUCT_VALUE,
+        changed: e.target ? Number(e.target.value) : ''
+      })
     }
   },
   data () {
     return {
       companyArea: 'jr',
       trainSeries: '',
+      companyNum: '00',
+      pValue: 2000,
       area: [
         {text: '国鉄・JR', value: 'jr'},
         {text: '大手関東私鉄', value: 'east'},
@@ -112,9 +146,11 @@ export default {
     }
   },
   mounted () {
-    this.companyNum = this.railwayCompany
+    this.companyArea = this.railwayCompanyArea
+    this.companyNum = this.railwayCompanyNum
     this.companyName = this.railwayCompanyName
     this.trainSeries = this.series
+    this.pValue = this.productValue
   }
 }
 </script>

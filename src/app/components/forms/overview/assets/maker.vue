@@ -2,7 +2,7 @@
   .terms
     .inner
       .title
-        h3 模型メーカー {{ maker }}
+        h3 模型メーカー
       .form
         b-form-group
           b-form-radio-group(

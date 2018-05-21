@@ -5,16 +5,23 @@
         :id="'coupler' + index"
         :options='form'
         :name="'coupler' + index"
-        v-model='answer'
+        v-model='val'
+        v-on:change='update'
       )
 </template>
 
 <script lang='ts'>
+import {
+  mapState,
+  mapActions
+} from 'vuex'
+import MutationTypes from '@store/mutationTypes'
+
 export default {
   props: [ 'index' ],
   data () {
     return {
-      answer: this.$store.state.coupler | 0,
+      val: '0',
       form: [
         {text: 'なし', value: '0'},
         {text: 'アーノルト', value: '1'},
@@ -23,6 +30,20 @@ export default {
         {text: 'TNカプラー'}
       ]
     }
+  },
+  computed: mapState(['t0']),
+  methods: {
+    ...mapActions(['updateStatus']),
+    update (e) {
+      this.updateStatus({
+        key: MutationTypes.UPDATES.DETAILS.COUPLER,
+        changed: e,
+        index: this.index
+      })
+    }
+  },
+  mounted () {
+    this.val = this.$store.state[`t${this.index}`].coupler
   }
 }
 </script>

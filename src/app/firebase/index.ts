@@ -10,7 +10,7 @@ const configs = {
 }
 
 function initFirebase () {
-  firebase.initializeApp(configs)  
+  firebase.initializeApp(configs)
 }
 
 export default initFirebase

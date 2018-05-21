@@ -37,7 +37,7 @@ export default {
     ...mapActions(['updateOverview']),
     update (e) {
       this.updateOverview({
-        key: MutationTypes.UPDATES.SERIES,
+        key: MutationTypes.UPDATES.GAUGE,
         changed: e
       })
     }

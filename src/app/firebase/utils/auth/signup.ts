@@ -1,10 +1,10 @@
 import * as firebase from 'firebase'
 
-function signup (email, password) {
+function signUp (email: string, password: string) {
   return firebase.auth().createUserWithEmailAndPassword(
     email,
     password
   )
 }
 
-export default signup
+export default signUp

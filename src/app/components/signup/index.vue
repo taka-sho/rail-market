@@ -3,41 +3,41 @@
     b-form-input(
       v-model='email'
       type='email'
-      placeholder='Enter your name'
+      placeholder='Enter your email address'
     )
     b-form-input(
-      v-model='password'
+      v-model='pass'
       type='password'
       placeholder='password'
     )
     b-button(
       type='submit'
       variant='primary'
-      v-on:click='signIn'
-    ) {{ status }}
-    router-link(to='/signup') Sign Up
+      v-on:click='signup'
+    ) Create
 </template>
 
 <script lang='ts'>
+import signUp from '@fire/utils/auth/signup'
 import signin from '@fire/utils/auth/signin'
 
 export default {
   data () {
     return {
       email: '',
-      password: '',
-      status: 'sign in'
+      pass: ''
     }
   },
   methods: {
-    signIn: function () {
-      this.status = 'Loading...'
-      signin(this.email, this.password)
-        .then(user => {
-          this.$router.push('/mypage')
-        }).catch(err => {
-          alert(err.message)
-          this.status = 'Sign Up'
+    signup () {
+      signUp(this.email, this.pass)
+        .then(() => {
+          signin(this.email, this.pass)
+            .then(user => {
+              this.$router.push('/info')
+            }).catch(err => {
+              alert(err.message)
+            })
         })
     }
   }

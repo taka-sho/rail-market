@@ -4,173 +4,189 @@ interface Detail {
   options: string
   pantograph: string
   running: string
+  imageUrl: string
 }
 
-export class Details {
+export class State {
+  constructor (uid: string) {
+    this.ownerUid = uid
+  }
+  ownerUid: string
+  sell: boolean = false
+  gauge: string = '0'
+  maker: string = '0'
+  makerName: string = ''
+  productType: string='0'
+  railwayCompanyArea: string = 'jr'
+  railwayCompanyNum: string = '00'
+  railwayCompanyName: string = ''
+  series: string = ''
+  productValue: number = 2000
+  numberOf: number = 0
+  deliverCompany: string = ''
+  deliverCompanyName: string = ''
+  deliverValue: number = 0
+
   t0: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-  t1: {
+  t1: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-}
-
-export class State {
-  gauge: string = '0'
-  maker: string = '0'
-  makerName: string = ''
-  productType: string='0'
-  railwayCompany: string = ''
-  railwayCompanyName: string = ''
-  series: string = ''
-  t00: Detail = {
+  t2: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-  t01: Detail = {
+  t3: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-  t02: Detail = {
+  t4: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-  t03: Detail = {
+  t5: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-  t04: Detail = {
+  t6: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-  t05: Detail = {
+  t7: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-  t06: Detail = {
+  t8: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
-  t07: Detail = {
+  t9: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
-  }
-  t08: Detail = {
-    coupler: '0',
-    lights: '0',
-    options: '0',
-    pantograph: '0',
-    running: '0'
-  }
-  t09: Detail = {
-    coupler: '0',
-    lights: '0',
-    options: '0',
-    pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t10: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t11: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t12: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t13: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t14: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t15: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t16: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t17: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t18: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
   t19: Detail = {
     coupler: '0',
     lights: '0',
     options: '0',
     pantograph: '0',
-    running: '0'
+    running: '0',
+    imageUrl: ''
   }
 }
 
-export default new State()
+export default State

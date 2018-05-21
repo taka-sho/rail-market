@@ -1,18 +1,21 @@
 <template lang="pug">
   b-container
     h2 出品物の状態
-    router-link(to='/mypage') Go to Mypage
     .terms
       .inner
         .title
           h3 両数
         .form
           b-form-select(
-            v-model="selected"
+            v-model.number="numberOf"
+            v-on:change='updateNumberOf'
             :options="options"
             class="mb-3"
           )
-    .terms(v-for='(i, index) in Number(selected)').cars
+    .terms(
+      v-for='(i, index) in 20'
+      v-show='index < numberOf'
+    ).cars
       .title
         h2 {{ i }}両目
       Lights(:index='index')
@@ -21,7 +24,11 @@
       Pantograph(:index='index')
       Options(:index='index')
       UploadImage(:index='index')
-    router-link(to='delivery') 配送方法へ
+    b-button(
+      type="button"
+      variant="primary"
+      v-on:click='pushFire'
+    ) Update
 </template>
 
 <script lang='ts'>
@@ -34,6 +41,9 @@ import UploadImage from './assets/uploadImage'
 
 import database from '@fire/utils/database'
 
+import { mapActions } from 'vuex'
+import MutationTypes from '@store/mutationTypes'
+
 export default {
   components: {
     Lights,
@@ -43,17 +53,39 @@ export default {
     Options,
     UploadImage
   },
+  methods: {
+    ...mapActions(['updateStatus']),
+    updateNumberOf (e) {
+      this.updateStatus({
+        key: MutationTypes.UPDATES.NUMBER_OF,
+        changed: e - 1,
+        index: this.index
+      })
+    },
+    pushFire () {
+      database.set(
+        `products/${database.uid()}/${this.$route.params.id}`,
+        this.$store.state
+      ).then(() => {
+        this.$router.push(`/assessment/${this.$route.params.id}/delivery`)
+      }).catch(err => {
+        throw new Error(err.message)
+      })
+    }
+
+  },
   data () {
     return {
       d: {},
       cars: 1,
-      selected: '1',
+      numberOf: '1',
       options: Array.apply(null, new Array(20)).map((v,i) => 1 + i) // make array 1 to 20
     }
   },
   beforeMount () {
-    database.read(database.uid()).then(snapshot => {
-      this.d = snapshot.val().trains[this.$route.params.id.status]
+    database.read(`products/${database.uid()}`).then(snapshot => {
+      this.d = snapshot.val()[this.$route.params.id.status]
+      this.numberOf = snapshot.val()[this.$route.params.id]['numberOf'] + 1
       if (!this.d) {}
     }).catch(e => {
       console.log(e.message)
