@@ -7,30 +7,116 @@
         .form
           b-form-group
         b-col
-          b-form-radio-group(id='btnradios4' stacked :options='area' v-model="selected" name='area')
-        b-col.form(v-if="selected === 'east'")
+          b-form-radio-group(
+            id='btnradios4'
+            stacked
+            :options='area'
+            v-model="companyArea"
+            v-on:change='updateCompanyArea'
+            name='area'
+          )
+        b-col.form(v-if="companyArea === 'east'")
           b-form-group
-            b-form-radio-group(id='btnradios4_1' stacked :options='eastJapan' name='company')
-        b-col.form(v-if="selected === 'west'")
+            b-form-radio-group(
+              id='btnradios4_1'
+              stacked
+              :options='eastJapan'
+              v-model="companyNum"
+              v-on:change='updageCompanyNum'
+              name='company'
+            )
+        b-col.form(v-if="companyArea === 'west'")
           b-form-group
-            b-form-radio-group(id='btnradios4_2' stacked :options='westJapan' name='company')
-        b-col.form(v-if="selected === 'other'")
+            b-form-radio-group(
+              id='btnradios4_2'
+              stacked
+              :options='westJapan'
+              v-model="companyNum"
+              v-on:change='updageCompanyNum'
+              name='company'
+            )
+        b-col.form(v-if="companyArea === 'other'")
           b-form-group
-            input(placeholder='鉄道事業者名')
+            input(
+              placeholder='鉄道事業者名'
+              v-model='companyName'
+              v-on:change='updateCompanyInput'
+            )
     .terms
       .inner
         .title
           h3 車両形式
         .form
           b-form-group
-            input(placeholder='車両形式（例：3000系, 100形')
+            input(
+              placeholder='車両形式（例：3000系, 100形'
+              v-on:change='updateSeries'
+              v-model='trainSeries'
+            )
+    .terms
+      .inner
+        .title
+          h3 販売価格
+        .form
+          b-form-group
+            input(
+              placeholder='2000円以上'
+              v-on:change='updateProductValue'
+              v-model.number='pValue'
+            )
 </template>
 
 <script lang='ts'>
+import { mapState, mapActions } from 'vuex'
+import MutationTypes from '@store/mutationTypes'
+
 export default {
+  computed: mapState([
+    'railwayCompanyArea',
+    'railwayCompanyNum',
+    'railwayCompanyName',
+    'series',
+    'productValue'
+  ]),
+  methods: {
+    ...mapActions(['updateOverview']),
+    updageCompanyNum (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.RAILWAY_COMPANY_NUM,
+        changed: e
+      })
+    },
+    updateCompanyInput (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.RAILWAY_COMPANY_NAME,
+        changed: e.target ? e.target.value : ''
+      })
+    },
+    updateCompanyArea (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.RAILWAY_COMPANY_AREA,
+        changed: e
+      })
+    },
+    updateSeries (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.SERIES,
+        changed: e.target ? e.target.value : ''
+      })
+    },
+    updateProductValue (e) {
+      this.updateOverview({
+        key: MutationTypes.UPDATES.PRODUCT_VALUE,
+        changed: e.target ? Number(e.target.value) : ''
+      })
+    }
+  },
   data () {
     return {
-      selected: 'jr',
+      companyArea: 'jr',
+      trainSeries: '',
+      companyNum: '00',
+      pValue: 2000,
       area: [
         {text: '国鉄・JR', value: 'jr'},
         {text: '大手関東私鉄', value: 'east'},
@@ -38,26 +124,33 @@ export default {
         {text: 'その他', value: 'other'}
       ],
       eastJapan: [
-        {text: '小田急(小田急電鉄株式会社)', value: 'odakyu'},
-        {text: '京王(京王電鉄株式会社)', value: 'keio'},
-        {text: '形成(形成電鉄株式会社)', value: 'keisei'},
-        {text: '京急(京浜急行電鉄株式会社)', value: 'keikyu'},
-        {text: '西武(西武鉄道株式会社)', value: 'seibu'},
-        {text: '東急(東京急行電鉄株式会社)', value: 'tokyu'},
-        {text: '東京メトロ(東京地下鉄株式会社)', value: 'metro'},
-        {text: '東武(東武鉄道株式会社)', value: 'tobu'},
-        {text: '都営(東京都交通局)', value: 'toei'}
+        {text: '小田急(小田急電鉄株式会社)', value: '00'},
+        {text: '京王(京王電鉄株式会社)', value: '01'},
+        {text: '形成(形成電鉄株式会社)', value: '02'},
+        {text: '京急(京浜急行電鉄株式会社)', value: '03'},
+        {text: '西武(西武鉄道株式会社)', value: '04'},
+        {text: '東急(東京急行電鉄株式会社)', value: '05'},
+        {text: '東京メトロ(東京地下鉄株式会社)', value: '06'},
+        {text: '東武(東武鉄道株式会社)', value: '07'},
+        {text: '都営(東京都交通局)', value: '08'}
       ],
       westJapan: [
-        {text: '近鉄(近畿日本鉄道株式会社)', value: 'kintetsu'},
-        {text: '京阪(京阪電気鉄道株式会社)', value: 'keihan'},
-        {text: '南海(南海電気鉄道株式会社)', value: 'nankai'},
-        {text: '西鉄(西日本鉄道株式会社)', value: 'nisitetsu'},
-        {text: '阪神(阪神電気鉄道株式会社)', value: 'hanshin'},
-        {text: '阪急(阪急電鉄株式会社)', value: 'hankyu'},
-        {text: '名鉄(名古屋鉄道株式会社)', value: 'meitetsu'}
+        {text: '近鉄(近畿日本鉄道株式会社)', value: '11'},
+        {text: '京阪(京阪電気鉄道株式会社)', value: '12'},
+        {text: '南海(南海電気鉄道株式会社)', value: '13'},
+        {text: '西鉄(西日本鉄道株式会社)', value: '14'},
+        {text: '阪神(阪神電気鉄道株式会社)', value: '15'},
+        {text: '阪急(阪急電鉄株式会社)', value: '16'},
+        {text: '名鉄(名古屋鉄道株式会社)', value: '17'}
       ]
     }
+  },
+  mounted () {
+    this.companyArea = this.railwayCompanyArea
+    this.companyNum = this.railwayCompanyNum
+    this.companyName = this.railwayCompanyName
+    this.trainSeries = this.series
+    this.pValue = this.productValue
   }
 }
 </script>
