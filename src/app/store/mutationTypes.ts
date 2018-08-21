@@ -1,5 +1,8 @@
 const MutationTypes = {
   UPDATES: {
+    SELLING_STATUS: 'STATUS',
+    BUYER_UID: 'BUYER_UID',
+
     GAUGE: 'GAUGE',
     MAKER: 'MAKER',
     MAKER_NAME: 'MAKER_NAME',
@@ -10,6 +13,18 @@ const MutationTypes = {
     SERIES: 'SERIES',
     PRODUCT_VALUE: 'PRODUCT_VALUE',
     NUMBER_OF: 'NUMBER_OF',
+
+    USER_INFO: {
+      USERNAME: 'USERNAME',
+      FAMILY_NAME: 'FAMILY_NAME',
+      UNDER_NAME: 'UNDER_NAME',
+      PREFECTURE: 'PREFECTURE',
+      ADDRESS: 'ADDRESS',
+      BUILDING_NAME: 'BUILDING_NAME',
+      POINT: 'POINT',
+      CART: 'CART'
+    },
+
     DETAILS: {
       COUPLER: 'COUPLER',
       LIGHTS: 'LIGHTS',
@@ -18,6 +33,7 @@ const MutationTypes = {
       RUNNING: 'RUNNING',
       IMAGE_URL: 'IMAGE_URL'
     },
+
     DELIVER: {
       COMPANY: 'COMPANY',
       NAME: 'NAME',

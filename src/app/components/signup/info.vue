@@ -1,35 +1,11 @@
 <template lang='pug'>
-  div
-    b-form-input(
-      v-model='username'
-      type='text'
-      placeholder='ユーザー名'
-    )
-    b-form-input(
-      v-model='fName'
-      type='text'
-      placeholder='苗字'
-    )
-    b-form-input(
-      v-model='uName'
-      type='text'
-      placeholder='名前'
-    )
-    b-form-input(
-      v-model='pre'
-      type='text'
-      placeholder='都道府県'
-    )
-    b-form-input(
-      v-model='address'
-      type='text'
-      placeholder='住所'
-    )
-    b-form-input(
-      v-model='buildingName'
-      type='text'
-      placeholder='建物名ほか'
-    )
+  b-container
+    Username
+    FamilyName
+    UnderName
+    Prefecture
+    Address
+    BuildingName
     b-button(
       type='submit'
       variant='primary'
@@ -41,28 +17,44 @@
 
 import database from '@fire/utils/database'
 
+import Username from './info/username'
+import FamilyName from './info/familyName'
+import UnderName from './info/underName'
+import Prefecture from './info/prefecture'
+import Address from './info/address'
+import BuildingName from './info/buildingName'
+
 export default {
+  components: {
+    Username,
+    FamilyName,
+    UnderName,
+    Prefecture,
+    Address,
+    BuildingName
+  },
   data () {
-    return {
-      username: '',
-      fName: '',
-      uName: '',
-      pre: '',
-      address: '',
-      buildingName: ''
-    }
+    return {}
   },
   methods: {
     setInfo () {
+      const {
+        username,
+        familyName,
+        underName,
+        prefecture,
+        address,
+        buildingName
+      } = this.$store.state.userInfo
       database.set(
-        `users/${database.uid()}/info`,
+        `users/${database.uid()}/userInfo`,
         {
-          username: this.username,
-          familyName: this.fName,
-          underName: this.uName,
-          prefecture: this.pre,
-          address: this.address,
-          buildingName: this.buildingName,
+          userName: username,
+          familyName: familyName,
+          underName: underName,
+          prefecture: prefecture,
+          address: address,
+          buildingName: buildingName,
           point: 0
         }
       ).then(() => {

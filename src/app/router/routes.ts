@@ -2,7 +2,6 @@ import Forms from '@compos/forms'
 import Mypage from '@compos/home/mypage'
 import Signup from '@compos/signup'
 import Info from '@compos/signup/info'
-// import Signout from '@compos/home/signout'
 import Signin from '@compos/home/signin'
 import GenAssessment from '@compos/forms/generate'
 import Overview from '@compos/forms/overview'
@@ -59,10 +58,6 @@ const routes = [
     path: '/info',
     component: Info
   }
-  // {
-  //   path: '/signout',
-  //   component: Signout
-  // }
 ]
 
 export default routes

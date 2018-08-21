@@ -7,12 +7,25 @@ interface Detail {
   imageUrl: string
 }
 
+interface UserInfo {
+  username: string
+  familyName: string
+  underName: string
+  prefecture: string
+  address: string
+  buildingName: string
+  point: number
+  cart: object
+}
+
 export class State {
   constructor (uid: string) {
     this.ownerUid = uid
   }
   ownerUid: string
-  sell: boolean = false
+  sellingStatus: string = 'selling'
+  buyerUid: string = ''
+
   gauge: string = '0'
   maker: string = '0'
   makerName: string = ''
@@ -26,6 +39,17 @@ export class State {
   deliverCompany: string = ''
   deliverCompanyName: string = ''
   deliverValue: number = 0
+
+  userInfo: UserInfo = {
+    username: '',
+    familyName: '',
+    underName: '',
+    prefecture: '',
+    address: '',
+    buildingName: '',
+    point: 0,
+    cart: {}
+  }
 
   t0: Detail = {
     coupler: '0',

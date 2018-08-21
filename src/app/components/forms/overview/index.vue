@@ -25,7 +25,7 @@ import * as firebase from 'firebase'
 import MutationTypes from '@store/mutationTypes'
 
 import Gauge from './assets/gauge'
-import Types from './assets/types'
+// import Types from './assets/types'
 import Maker from './assets/maker'
 import Company from './assets/company'
 

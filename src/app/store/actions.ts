@@ -15,6 +15,19 @@ interface Args {
 const UPDATE = MutationTypes.UPDATES
 
 const actions = <ActionTree<State, any>> {
+  updateSellStatus: (
+    store: ActionContext<State, any>,
+    {key, changed}: Args
+  ) => {
+    switch (key) {
+      case UPDATE.SELLING_STATUS:
+        store.commit(UPDATE.SELLING_STATUS, changed)
+        break
+      case UPDATE.BUYER_UID:
+        store.commit(UPDATE.BUYER_UID, changed)
+        break
+    }
+  },
   updateOverview: (
     store: ActionContext<State, any>,
     {key, changed}: Args
@@ -90,6 +103,37 @@ const actions = <ActionTree<State, any>> {
         break
       case UPDATE.DELIVER.VALUE:
         store.commit(UPDATE.DELIVER.VALUE, {changed})
+        break
+    }
+  },
+  updateUserInfo (
+    store: ActionContext<State, any>,
+    {key, changed}: Args
+  ) {
+    switch (key) {
+      case UPDATE.USER_INFO.USERNAME:
+        store.commit(UPDATE.USER_INFO.USERNAME, changed)
+        break
+      case UPDATE.USER_INFO.FAMILY_NAME:
+        store.commit(UPDATE.USER_INFO.FAMILY_NAME, changed)
+        break
+      case UPDATE.USER_INFO.UNDER_NAME:
+        store.commit(UPDATE.USER_INFO.UNDER_NAME, changed)
+        break
+      case UPDATE.USER_INFO.PREFECTURE:
+        store.commit(UPDATE.USER_INFO.PREFECTURE, changed)
+        break
+      case UPDATE.USER_INFO.ADDRESS:
+        store.commit(UPDATE.USER_INFO.ADDRESS, changed)
+        break
+      case UPDATE.USER_INFO.BUILDING_NAME:
+        store.commit(UPDATE.USER_INFO.BUILDING_NAME, changed)
+        break
+      case UPDATE.USER_INFO.POINT:
+        store.commit(UPDATE.USER_INFO.POINT, changed)
+        break
+      case UPDATE.USER_INFO.CART:
+        store.commit(UPDATE.USER_INFO.CART, changed)
         break
     }
   }
